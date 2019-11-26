@@ -34,10 +34,10 @@ write.csv(references, 'Data/references_raw.csv',row.names=F)
 
 # path.fulltext: Path to the folder with the full text downloads
 # path.pmc: Path to the doi folder
-# path.save.stats <- ‘ProcessedQueries/Stats/’ # place to store a summary stats text file
-# path.save.reviews <- ‘ProcessedQueries/Reviews/’ # place to store a file of papers to review
-# path.save.query <- ‘Matt/from_scratch/data_output/’ # a place to save the final output
-# name <- ‘cleaned_papers_all_years’
+# path.save.stats:  place to store a summary stats text file
+# path.save.reviews: place to store a file of papers to review
+# path.save.query: a place to save the final output
+# name: of the file to be saved
 
 path <- "./Data/references_raw.csv"
 path.fulltext <- "fulltext/"
@@ -52,8 +52,7 @@ cleaning.query(path,name,path.save.reviews,path.save.query,path.save.stats, path
 #############################################################
 # PRE-PROCESSING ABSTRACTS FOR TOPIC ANALYSIS 
 
-# PATHS
-# path_data <- "./Data/ProcessedQueries/References/"
+# PATH
 path_dict_tools <- "./Data/AuxiliaryTextMining/"
 
 # calling auxiliary functions
@@ -115,9 +114,11 @@ saveRDS(LDAModel, file=paste0('./Data/LDAModel',N_topics,
 #######################################################
 # ANALYZING TOPIC MODELING RESULTS
 
+path_plots <- "./Plots/" # where we'll save the wordcloud file
+
 # LDAModel <- readRDS(file = paste0("./Data/LDAModel",N_topics,"_alpha_",alpha_par,"_method_",method_par,".rds"))
 
-# 1. Topic as a mixture of words
+# Topic as a mixture of words
 # beta: the probability of that term being generated from that topic.
 papers_beta <- tidytext::tidy(LDAModel, matrix = "beta")
 # papers_beta
@@ -168,8 +169,6 @@ word_clouds_ggsave <- function(data, values_thresh, indiv_angle = FALSE, color_p
   
 }
 
-# arguments for wordcloud function
-path_plots <- "./Plots/"
 filename <- paste0("wordcloud_topics_",N_topics,".pdf")
 
 word_clouds_ggsave(data = papers_beta, values_thresh = 0.003, indiv_angle = FALSE, color_pal = color_pal, max_size_area = 30, 
