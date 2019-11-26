@@ -1,0 +1,6 @@
+first amount of queries: 499
+duplicates: 0
+pass R filter: 450
+papers from weird journals: 0
+potential reviews: 13
+papers kept: 450
