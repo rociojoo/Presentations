@@ -23,6 +23,7 @@ library(ggwordcloud)
 # Read in the references directory and combine into one file
 
 references <- references_read('Data/Query-Results-WoK',dir=T, include_all=T)
+head(references)
 write.csv(references, 'Data/references_raw.csv',row.names=F)
 
 #######################################################################
@@ -101,7 +102,7 @@ datos_dtm <- datosFreq %>%
   cast_dtm(document = paper, term = word, value = n)
 
 # arguments for LDA
-N_topics <- 15
+N_topics <- 10
 alpha_par <- 1 # 0.25
 method_par <- "VEM"
 
